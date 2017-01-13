@@ -73,4 +73,8 @@ var setAlbum = function(album){
 
 window.onload = function(){
 	setAlbum(albumGrey);
+	
+	document.addEventListener('click', function(){
+		alert(event.target);
+	});
 };
