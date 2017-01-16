@@ -71,10 +71,28 @@ var setAlbum = function(album){
 	}
 };
 
+var songList = document.getElementById('songList');
+
+var playButton = '<a class="song-button"><span class="ion-play"></span></a>';
+
 window.onload = function(){
 	setAlbum(albumGrey);
-	
 	document.addEventListener('click', function(){
-		alert(event.target);
+//		console.log(event.target);
+		
+		var x = event.target;
+		console.log("event:" + event);
+		console.log("event.target" + x);
+		console.log("parent:" + x.parentElement);
+		console.log("innerHTML: " + x.innerHTML);
+		
+		
 	});
 };
+
+//window.onload = function(){
+//	setAlbum(albumGrey);
+//	
+//	songList.addEventListener('mouseover', function(e){	
+//		e.target.parentElement.querySelector('.song-number').innerHTML = playButton;
+//	});
