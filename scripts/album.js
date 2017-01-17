@@ -52,7 +52,7 @@ var albumGrey = {
 var createRow = function (number, name, length){
 	var template = 
 		'<tr class="album-view-song-item">' +
-		'	<td class="song-number">' + number + '</td>' +
+		'	<td class="song-number" data-song-number="' + number + '">' + number + '</td>' +
 		'	<td class="song-title">' + name + '</td>' +
 		'	<td class="song-duration">' + length +'</td>' +
 		'</tr>';
@@ -72,27 +72,39 @@ var setAlbum = function(album){
 };
 
 var songList = document.getElementById('songList');
+var songRows = document.getElementsByClassName('album-view-song-item');
 
 var playButton = '<a class="song-button"><span class="ion-play"></span></a>';
 
-window.onload = function(){
-	setAlbum(albumGrey);
-	document.addEventListener('click', function(){
-//		console.log(event.target);
-		
-		var x = event.target;
-		console.log("event:" + event);
-		console.log("event.target" + x);
-		console.log("parent:" + x.parentElement);
-		console.log("innerHTML: " + x.innerHTML);
-		
-		
-	});
-};
 
 //window.onload = function(){
-//	setAlbum(albumGrey);
 //	
-//	songList.addEventListener('mouseover', function(e){	
-//		e.target.parentElement.querySelector('.song-number').innerHTML = playButton;
+//	setAlbum(albumGrey);
+//	document.addEventListener('click', function(){
+//		
+//		var x = event.target;
+//		console.log("event:" + event);
+//		console.log("event.target" + x);
+//		console.log("parent:" + x.parentElement);
+//		console.log("innerHTML: " + x.innerHTML);
+//		
 //	});
+//};
+
+window.onload = function(){
+	setAlbum(albumGrey);
+	
+	console.log(songRows[0]);
+	
+	songList.addEventListener('mouseover', function(e){	
+		e.target.parentElement.querySelector('.song-number').innerHTML = playButton;
+	});
+
+	for (var i = 0; i< songRows.length; i++){
+		
+		songRows[i].addEventListener('mouseleave', function(e){
+			var x = e.target.children[0];
+			x.innerHTML = x.getAttribute('data-song-number');
+		});
+	}
+};
